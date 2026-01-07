@@ -24,7 +24,7 @@
 // view & pure functions
 
 pragma solidity ^0.8.18;
-
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 /*
 *@title: Decentralised Stable Coin
 *@author: cypherpulse.base.eth
