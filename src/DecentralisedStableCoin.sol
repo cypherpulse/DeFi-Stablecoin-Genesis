@@ -24,7 +24,7 @@
 // view & pure functions
 
 pragma solidity ^0.8.18;
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import {ERC20Burnable,ERC20} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 /*
 *@title: Decentralised Stable Coin
 *@author: cypherpulse.base.eth
