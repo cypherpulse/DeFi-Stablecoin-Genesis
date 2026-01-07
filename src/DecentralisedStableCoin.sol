@@ -44,4 +44,8 @@ contract DecentralizedStableCoin is ERC20Burnable{
     // Constructor //
     /////////////////
     constructor() ERC20("DecentralizedStableCoin", "DSC"){}
+
+    function burn (uint256 _amount) public override Only{
+
+    }
 }
