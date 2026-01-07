@@ -64,5 +64,7 @@ contract DecentralizedStableCoin is ERC20Burnable{
         if(_amount <=0){
             revert DecentralizedStableCoin__MustBeMoreThanZero();
         }
+        _mint(_to, _amount);
+        return true;
     }
 }
