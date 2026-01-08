@@ -45,3 +45,35 @@ pragma solidity ^0.8.18;
  * for minting and redeeming DSC, as well as depositing and withdrawing collateral.
  * @notice This contract is based on the MakerDAO DSS system
  */
+
+ contract DSCEngine {
+
+///////////////////
+//   Functions   //
+///////////////////
+
+///////////////////////////
+//   External Functions  //
+///////////////////////////
+
+/** 
+ * @param tokenCollateralAddress: The ERC20 token address of the collateral you're depositing
+ * @param amountCollateral: The amount of collateral you're depositing
+ */
+
+function depositCollateral(address tokenCollateralAddress, uint256 amountCollateral) external{}
+
+function depositCollateralAndMintDsc() external{}
+
+function redeemCollateralForDsc() external {}
+
+function redeemCollateral() external{}
+
+function mintDsc() external {}
+
+function burnDsc() external {}
+
+function liquidate() external {}
+
+function getHealthFactor() external view {}
+ }
