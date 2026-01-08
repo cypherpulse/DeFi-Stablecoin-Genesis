@@ -26,12 +26,12 @@
 pragma solidity ^0.8.18;
 import {ERC20Burnable,ERC20} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
-/*
-*@title: Decentralised Stable Coin
-*@author: cypherpulse.base.eth
-*collateral : Exogenous(ETH & BTC)
-*Minting: Algorithmic
-*Relative Stability: Coin pegged to USD
+/** 
+ * @title Decentralised Stable Coin
+ * @author cypherpulse.base.eth
+ * @notice Collateral: Exogenous (ETH & BTC)
+ * @notice Minting: Algorithmic
+ * @notice Relative Stability: Coin pegged to USD
 *
 * This is the contract meant to be governed by DSCEngine. This contract is just the ERC20 implementation of our stablecoin system.
 */
