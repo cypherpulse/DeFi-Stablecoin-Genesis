@@ -141,7 +141,7 @@ contract DSCEngine is ReentrancyGuard {
     * @param amountDscToMint: The amount of DSC you want to mint
     * You can only mint DSC if you have  enough collateral
     */
-    function mintDsc() external {}
+    function mintDsc(uint256 amountDscToMint) external {}
 
     function burnDsc() external {}
 
