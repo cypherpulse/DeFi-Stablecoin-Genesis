@@ -64,6 +64,7 @@ error DSCEngine__TokenNotAllowed(address token);
 
 mapping(address token => address priceFeed) private s_priceFeeds;
 DecentralizedStableCoin private immutable i_dsc;
+mapping(address user => mapping(address token => uint256 amount)) private s_collateralDeposited;
 
 ///////////////////
 //   Modifiers   //
@@ -107,7 +108,9 @@ constructor(address[] memory tokenAddresses, address[] memory priceFeedAddresses
  * @param amountCollateral: The amount of collateral you're depositing
  */
 
-function depositCollateral(address tokenCollateralAddress, uint256 amountCollateral) external moreThanZero(amountCollateral) isAllowedToken(tokenCollateralAddress) nonReentrant{}
+function depositCollateral(address tokenCollateralAddress, uint256 amountCollateral) external moreThanZero(amountCollateral) isAllowedToken(tokenCollateralAddress) nonReentrant{
+    s_collateralDeposited[msg.sender][tokenCollateralAddress] += amountCollateral;
+}
 
 function depositCollateralAndMintDsc() external{}
 
