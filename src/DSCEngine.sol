@@ -55,12 +55,14 @@ import {DecentralizedStableCoin} from "./DecentralizedStableCoin.sol";
 ///////////////////
 error DSCEngine__NeedsMoreThanZero();
 error DSCEngine__TokenAddressesAndPriceFeedAddressesMustBeSameLength();
+error DSCEngine__TokenNotAllowed(address token);
 
 /////////////////////////
 //   State Variables   //
 /////////////////////////
 
 mapping(address token => address priceFeed) private s_priceFeeds;
+DecentralizedStableCoin private immutable i_dsc;
 
 ///////////////////
 //   Modifiers   //
@@ -74,8 +76,12 @@ modifier moreThanZero(uint256 amount){
 }
 
 modifier isAllowedToken(address token){
-
+    if(s_priceFeeds[token]==address(0)){
+        revert DSCEngine__TokenNotAllowed(token);
+    }
+    _;
 }
+
 ///////////////////
 //   Functions   //
 ///////////////////
@@ -88,6 +94,7 @@ constructor(address[] memory tokenAddresses, address[] memory priceFeedAddresses
     for(uint256 i=0; i < tokenAddresses.length; i++){
     s_priceFeeds[tokenAddresses[i]] = priceFeedAddresses[i];
     }
+    i_dsc = DecentralizedStableCoin(dscAddress);
 }
 
 ///////////////////////////
