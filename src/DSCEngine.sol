@@ -66,6 +66,13 @@ mapping(address token => address priceFeed) private s_priceFeeds;
 DecentralizedStableCoin private immutable i_dsc;
 mapping(address user => mapping(address token => uint256 amount)) private s_collateralDeposited;
 
+////////////////
+//   Events   //
+////////////////
+
+event CollateralDeposited(address indexed user, address indexed token, uint256 indexed amount);
+
+
 ///////////////////
 //   Modifiers   //
 ///////////////////
@@ -87,6 +94,8 @@ modifier isAllowedToken(address token){
 ///////////////////
 //   Functions   //
 ///////////////////
+
+
 
 constructor(address[] memory tokenAddresses, address[] memory priceFeedAddresses, address dscAddress){
     if(tokenAddresses.length != priceFeedAddresses.length){
@@ -110,6 +119,7 @@ constructor(address[] memory tokenAddresses, address[] memory priceFeedAddresses
 
 function depositCollateral(address tokenCollateralAddress, uint256 amountCollateral) external moreThanZero(amountCollateral) isAllowedToken(tokenCollateralAddress) nonReentrant{
     s_collateralDeposited[msg.sender][tokenCollateralAddress] += amountCollateral;
+    emit CollateralDeposited(msg.sender, tokenCollateralAddress, amountCollateral);
 }
 
 function depositCollateralAndMintDsc() external{}
