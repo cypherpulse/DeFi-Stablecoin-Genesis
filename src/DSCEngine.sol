@@ -49,6 +49,25 @@ pragma solidity ^0.8.18;
  contract DSCEngine {
 
 ///////////////////
+//     Errors    //
+///////////////////
+error DSCEngine__NeedsMoreThanZero();
+
+///////////////////
+//   Modifiers   //
+///////////////////
+
+modifier moreThanZero(uint256 amount){
+    if(amount == 0){
+        revert DSCEngine__NeedsMoreThanZero();
+    }
+    _;
+}
+
+modifier isAllowedToken(address token){
+
+}
+///////////////////
 //   Functions   //
 ///////////////////
 
