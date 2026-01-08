@@ -108,6 +108,7 @@ contract DSCEngine is ReentrancyGuard {
     ///////////////////////////
     //   External Functions  //
     ///////////////////////////
+    function depositCollateralAndMintDsc() external {}
 
     /**
      * @param tokenCollateralAddress: The ERC20 token address of the collateral you're depositing
@@ -130,7 +131,7 @@ contract DSCEngine is ReentrancyGuard {
         }
     }
 
-    function depositCollateralAndMintDsc() external {}
+
 
     function redeemCollateralForDsc() external {}
 
