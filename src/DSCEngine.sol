@@ -26,6 +26,7 @@
 pragma solidity ^0.8.18;
 
 import {DecentralizedStableCoin} from "./DecentralizedStableCoin.sol";
+import {ReentrancyGuard} from "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 
 /** 
@@ -48,7 +49,7 @@ import {DecentralizedStableCoin} from "./DecentralizedStableCoin.sol";
  * @notice This contract is based on the MakerDAO DSS system
  */
 
- contract DSCEngine {
+ contract DSCEngine is ReentrancyGuard{
 
 ///////////////////
 //     Errors    //
@@ -106,7 +107,7 @@ constructor(address[] memory tokenAddresses, address[] memory priceFeedAddresses
  * @param amountCollateral: The amount of collateral you're depositing
  */
 
-function depositCollateral(address tokenCollateralAddress, uint256 amountCollateral) external{}
+function depositCollateral(address tokenCollateralAddress, uint256 amountCollateral) external moreThanZero(amountCollateral) isAllowedToken(tokenCollateralAddress) nonReentrant{}
 
 function depositCollateralAndMintDsc() external{}
 
