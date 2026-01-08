@@ -65,6 +65,7 @@ contract DSCEngine is ReentrancyGuard {
     mapping(address token => address priceFeed) private s_priceFeeds;
     DecentralizedStableCoin private immutable i_dsc;
     mapping(address user => mapping(address token => uint256 amount)) private s_collateralDeposited;
+    mapping(address user => uint256 amountDscMinted) private s_DscMinted;
 
     ////////////////
     //   Events   //
@@ -141,7 +142,7 @@ contract DSCEngine is ReentrancyGuard {
     * @param amountDscToMint: The amount of DSC you want to mint
     * You can only mint DSC if you have  enough collateral
     */
-    function mintDsc(uint256 amountDscToMint) external {}
+    function mintDsc(uint256 amountDscToMint) external moreThanZero(amountDscToMint) nonReentrant{}
 
     function burnDsc() external {}
 
