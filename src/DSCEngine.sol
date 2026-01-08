@@ -25,6 +25,8 @@
 
 pragma solidity ^0.8.18;
 
+import {DecentralizedStableCoin} from "./DecentralizedStableCoin.sol";
+
 
 /** 
  * @title DSCEngine
@@ -52,6 +54,13 @@ pragma solidity ^0.8.18;
 //     Errors    //
 ///////////////////
 error DSCEngine__NeedsMoreThanZero();
+error DSCEngine__TokenAddressesAndPriceFeedAddressesMustBeSameLength();
+
+/////////////////////////
+//   State Variables   //
+/////////////////////////
+
+mapping(address token => address priceFeed) private s_priceFeeds;
 
 ///////////////////
 //   Modifiers   //
@@ -70,6 +79,16 @@ modifier isAllowedToken(address token){
 ///////////////////
 //   Functions   //
 ///////////////////
+
+constructor(address[] memory tokenAddresses, address[] memory priceFeedAddresses, address dscAddress){
+    if(tokenAddresses.length != priceFeedAddresses.length){
+        revert DSCEngine__TokenAddressesAndPriceFeedAddressesMustBeSameLength();
+    }
+
+    for(uint256 i=0; i < tokenAddresses.length; i++){
+    s_priceFeeds[tokenAddresses[i]] = priceFeedAddresses[i];
+    }
+}
 
 ///////////////////////////
 //   External Functions  //
