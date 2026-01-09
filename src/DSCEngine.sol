@@ -132,21 +132,25 @@ contract DSCEngine is ReentrancyGuard {
         }
     }
 
-
-
     function redeemCollateralForDsc() external {}
 
     function redeemCollateral() external {}
-    
+
     /**
-    * @param amountDscToMint: The amount of DSC you want to mint
-    * You can only mint DSC if you have  enough collateral
-    */
-    function mintDsc(uint256 amountDscToMint) external moreThanZero(amountDscToMint) nonReentrant{}
+     * @param amountDscToMint: The amount of DSC you want to mint
+     * You can only mint DSC if you have  enough collateral
+     */
+    function mintDsc(uint256 amountDscToMint) external moreThanZero(amountDscToMint) nonReentrant {}
 
     function burnDsc() external {}
 
     function liquidate() external {}
 
     function getHealthFactor() external view {}
+
+    ///////////////////////////////////////////
+    //    Private & Internal View Functions  //
+    ///////////////////////////////////////////
+
+    function _revertIfHealthFactorIsBroken(address user) {}
 }
