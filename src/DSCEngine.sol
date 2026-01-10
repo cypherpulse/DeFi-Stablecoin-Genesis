@@ -158,7 +158,18 @@ contract DSCEngine is ReentrancyGuard {
         }
     }
 
-    function redeemCollateralForDsc() external {}
+    /**
+     * @param tokenCollateralAddress: the collateral address to redeem
+     * @param amountCollateral: amount of collateral to redeem
+     * @param amountDscToBurn: amount of DSC to burn
+     * This function burns DSC and redeems underlying collateral in one transaction
+     */
+    function redeemCollateralForDsc(address tokenCollateralAddress, uint256 amountCollateral, uint256 amountDscToBurn)
+        external
+    {
+        burnDsc(amountDscToBurn);
+        redeemCollateral(tokenCollateralAddress, amountCollateral);
+    }
 
     function redeemCollateral(address tokenCollateralAddress, uint256 amountCollateral)
         public
@@ -195,6 +206,8 @@ contract DSCEngine is ReentrancyGuard {
         if (!success) {
             revert DSCEngine__TransferFailed();
         }
+        i_dsc.burn(amount);
+        _revertIfHealthFactorIsBroken(msg.sender);
     }
 
     function liquidate() external {}
