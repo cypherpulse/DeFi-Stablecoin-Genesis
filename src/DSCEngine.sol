@@ -230,6 +230,9 @@ anyone.
 
     function liquidate(address collateral,address user,uint256 debtToCover) external moreThanZero(debtToCover) nonReentrant{
         uint256 startingUserHealthFactor = _healthFactor(user);
+        if (startingUserHealthFactor >= MIN_HEALTH_FACTOR) {
+            revert DSCEngine__HealthFactorOk();
+        }
     }
 
     function getHealthFactor() external view {}
