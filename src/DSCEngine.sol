@@ -171,7 +171,7 @@ contract DSCEngine is ReentrancyGuard {
     function redeemCollateralForDsc(address tokenCollateralAddress, uint256 amountCollateral, uint256 amountDscToBurn)
         external
     {
-        burnDsc(amountDscToBurn);
+        _burnDsc(amountDscToBurn, msg.sender, msg.sender);
         redeemCollateral(tokenCollateralAddress, amountCollateral);
     }
 
@@ -197,7 +197,7 @@ contract DSCEngine is ReentrancyGuard {
         }
     }
 
-    function burnDsc(int256 amount) external moreThanZero(amount) {
+    function burnDsc(uint256 amount) external moreThanZero(amount) {
         _burnDsc(amount, msg.sender, msg.sender);
         _revertIfHealthFactorIsBroken(msg.sender);
     }
