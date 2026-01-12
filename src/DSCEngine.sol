@@ -61,7 +61,7 @@ contract DSCEngine is ReentrancyGuard {
     error DSCEngine__BreaksHealthFactor(uint256 healthFactor);
     error DSCEngine__MintFailed();
     error DSCEngine__HealthFactorOk();
-
+    error DSCEngine__HealthFactorNotImproved();
     /////////////////////////
     //   State Variables   //
     /////////////////////////
@@ -234,9 +234,9 @@ contract DSCEngine is ReentrancyGuard {
         _burnDsc(debtToCover, user, msg.sender);
 
         uint256 endingUserHealthFactor = _healthFactor(user);
-if(endingUserHealthFactor <= startingUserHealthFactor){
-    revert DSCEngine__HealthFactorNotImproved();
-}
+        if (endingUserHealthFactor <= startingUserHealthFactor) {
+            revert DSCEngine__HealthFactorNotImproved();
+        }
     }
 
     function getHealthFactor() external view {}
