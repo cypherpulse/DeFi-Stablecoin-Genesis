@@ -28,6 +28,10 @@ contract DSCEngineTest is Test {
     }
 
     /////////////////
+    // Constructor Tests //
+    /////////////////
+
+    /////////////////
     // Price Tests //
     /////////////////
     function testGetUsdValue() public {
