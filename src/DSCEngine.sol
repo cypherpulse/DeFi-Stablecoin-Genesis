@@ -126,7 +126,7 @@ contract DSCEngine is ReentrancyGuard {
     //   External Functions  //
     ///////////////////////////
 
-    /**
+    /***
      * @param tokenCollateralAddress: the address of the token to deposit as collateral
      * @param amountCollateral: The amount of collateral to deposit
      * @param amountDscToMint: The amount of DecentralizedStableCoin to mint
@@ -202,7 +202,7 @@ contract DSCEngine is ReentrancyGuard {
         _revertIfHealthFactorIsBroken(msg.sender);
     }
 
-    /**
+    /***
      * @param collateral: The ERC20 token address of the collateral you're using to make the protocol solvent again.
      * This is collateral that you're going to take from the user who is insolvent.
      * In return, you have to burn your DSC to pay off their debt, but you don't pay off your own.
