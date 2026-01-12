@@ -231,6 +231,12 @@ contract DSCEngine is ReentrancyGuard {
         uint256 bonusCollateral = (tokenAmountFromDebtCovered * LIQUIDATION_BONUS) / LIQUIDATION_PRECISION;
         uint256 totalCollateralRedeemed = tokenAmountFromDebtCovered + bonusCollateral;
         _redeemCollateral(collateral, totalCollateralRedeemed, user, msg.sender);
+        _burnDsc(debtToCover, user, msg.sender);
+
+        uint256 endingUserHealthFactor = _healthFactor(user);
+if(endingUserHealthFactor <= startingUserHealthFactor){
+    revert DSCEngine__HealthFactorNotImproved();
+}
     }
 
     function getHealthFactor() external view {}
