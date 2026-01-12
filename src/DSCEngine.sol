@@ -265,7 +265,9 @@ contract DSCEngine is ReentrancyGuard {
     //    Private & Internal View Functions  //
     ///////////////////////////////////////////
 
-    function _burnDsc(uint256 amountDscToBurn, address onBehalfOf, address dscFrom) private {}
+    function _burnDsc(uint256 amountDscToBurn, address onBehalfOf, address dscFrom) private {
+        s_DscMinted[onBehalfOf] -= amountDscToBurn;
+    }
 
     function _redeemCollateral(address tokenCollateralAddress, uint256 amountCollateral, address from, address to)
         private
