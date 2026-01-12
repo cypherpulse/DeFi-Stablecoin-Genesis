@@ -12,8 +12,11 @@ contract DSCEngineTest is Test {
     DecentralizedStableCoin dsc;
     DSCEngine dsce;
     HelperConfig config;
+
     address weth;
+    address public wbtc;
     address ethUsdPriceFeed;
+    address public btcUsdPriceFeed;
 
     address public USER = makeAddr("user");
     uint256 public constant AMOUNT_COLLATERAL = 10 ether;
@@ -27,9 +30,21 @@ contract DSCEngineTest is Test {
         ERC20Mock(weth).mint(USER, STARTING_ERC20_BALANCE);
     }
 
-    /////////////////
+    ////////////////////////
     // Constructor Tests //
-    /////////////////
+    ////////////////////////
+
+    address[] public tokenAddresses;
+    address[] public feedAddresses;
+
+    function testRevertsIfTokenLengthDoesntMatchPriceFeeds() public {
+        tokenAddresses.push(weth);
+        feedAddresses.push(ethUsdPriceFeed);
+        feedAddresses.push(btcUsdPriceFeed);
+
+        vm.expectRevert(DSCEngine.DSCEngine_TokenAddressesAndPriceFeedAddressesMustBeSameLength.selector);
+        new DSCEngine(tokenAddresses, feedAddresses, address(dsc));
+    }
 
     /////////////////
     // Price Tests //
