@@ -37,4 +37,6 @@ contract OpenInvariantsTest is StdInvariant, Test {
         (,, weth, wbtc,) = config.activeNetworkConfig();
         targetContract(address(dsce));
     }
+
+    function invariant_protocolMustHaveMoreValueThanTotalSupply() public view {}
 }
