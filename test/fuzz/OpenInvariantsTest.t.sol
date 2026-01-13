@@ -26,4 +26,9 @@ contract OpenInvariantsTest is StdInvariant, Test {
     DSCEngine dsce;
     DecentralizedStableCoin dsc;
     HelperConfig config;
+
+    function setUp() external {
+        deployer = new DeployDSC();
+        (dsc, dsce, config) = deployer.run();
+    }
 }
