@@ -6,4 +6,6 @@
 *This allows us to have more control over the fuzz testing process and focus on specific areas of our contract that we want to test more thoroughly.
 */
 
- pragma solidity ^0.8.20;
+pragma solidity ^0.8.20;
+
+contract Handler is Test {}
