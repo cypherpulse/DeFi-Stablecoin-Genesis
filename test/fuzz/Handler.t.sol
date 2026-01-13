@@ -60,4 +60,19 @@ contract Handler is Test {
         }
         dsce.redeemCollateral(address(collateral), amountCollateral);
     }
+
+    function mintDsc(uint256 amount) public {
+        (uint256 totalDscMinted, uint256 collateralValueInUsd) = dsce.getAccountInformation(msg.sender);
+        uint256 maxDscToMint = (collateralValueInUsd / 2) - totalDscMinted;
+        if (maxDscToMint < 0) {
+            return;
+        }
+        amount = bound(amount, 0, maxDscToMint);
+        if (amount < 0) {
+            return;
+        }
+        vm.startPrank(msg.sender);
+        dsce.mintDsc(amount);
+        vm.stopPrank();
+    }
 }
