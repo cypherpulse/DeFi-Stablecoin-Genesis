@@ -38,5 +38,12 @@ contract OpenInvariantsTest is StdInvariant, Test {
         targetContract(address(dsce));
     }
 
-    function invariant_protocolMustHaveMoreValueThanTotalSupply() public view {}
+    function invariant_protocolMustHaveMoreValueThanTotalSupply() public view {
+        uint256 totalSupply = dsc.totalSupply();
+        uint256 totalWethDeposited = IERC20(weth).balanceOf(address(dsce));
+        uint256 totalWbtcDeposited = IERC20(wbtc).balanceOf(address(dsce));
+
+        uint256 wethValue = dsce.getUsdValue(weth, totalWethDeposited);
+        uint256 wbtcValue = dsce.getUsdValue(wbtc, totalWbtcDeposited);
+    }
 }
