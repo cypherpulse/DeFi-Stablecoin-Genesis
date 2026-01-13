@@ -49,5 +49,7 @@ contract OpenInvariantsTest is StdInvariant, Test {
         console.log("Weth Value: ", wethValue);
         console.log("Wbtc Value: ", wbtcValue);
         console.log("Total Supply: ", totalSupply);
+
+        assert(wethValue + wbtcValue >= totalSupply);
     }
 }
