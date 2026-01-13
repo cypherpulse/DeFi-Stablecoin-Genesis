@@ -34,5 +34,7 @@ contract OpenInvariantsTest is StdInvariant, Test {
     function setUp() external {
         deployer = new DeployDSC();
         (dsc, dsce, config) = deployer.run();
+        (,, weth, wbtc,) = config.activeNetworkConfig();
+        targetContract(address(dsce));
     }
 }
