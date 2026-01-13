@@ -28,6 +28,9 @@ contract OpenInvariantsTest is StdInvariant, Test {
     DecentralizedStableCoin dsc;
     HelperConfig config;
 
+    address weth;
+    address wbtc;
+
     function setUp() external {
         deployer = new DeployDSC();
         (dsc, dsce, config) = deployer.run();
