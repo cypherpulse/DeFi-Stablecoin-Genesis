@@ -14,7 +14,7 @@
 
 pragma solidity ^0.8.20;
 
-import {Test} from "forge-std/Test.sol";
+import {Test, console} from "forge-std/Test.sol";
 import {StdInvariant} from "forge-std/StdInvariant.sol";
 import {DeployDSC} from "../../script/DeployDSC.s.sol";
 import {DSCEngine} from "../../src/DSCEngine.sol";
@@ -45,5 +45,9 @@ contract OpenInvariantsTest is StdInvariant, Test {
 
         uint256 wethValue = dsce.getUsdValue(weth, totalWethDeposited);
         uint256 wbtcValue = dsce.getUsdValue(wbtc, totalWbtcDeposited);
+
+        console.log("Weth Value: ", wethValue);
+        console.log("Wbtc Value: ", wbtcValue);
+        console.log("Total Supply: ", totalSupply);
     }
 }
