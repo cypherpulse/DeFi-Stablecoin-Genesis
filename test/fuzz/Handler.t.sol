@@ -15,8 +15,19 @@ contract Handler is Test {
     DSCEngine dsce;
     DecentralizedStableCoin dsc;
 
+    ERC20Mock weth;
+    ERC20Mock wbtc;
+
     constructor(DSCEngine _engine, DecentralizedStableCoin _dsc) {
         dsce = _engine;
         dsc = _dsc;
+
+        address[] memory collateralTokens = dsce.getCollateralTokens();
+        weth = ERC20Mock(collateralTokens[0]);
+        wbtc = ERC20Mock(collateralTokens[1]);
+    }
+
+    function depositCollateral(uint256 collateral, uint256 amountCollateral) public {
+        dsce.depositCollateral(collateral, amountCollateral);
     }
 }
