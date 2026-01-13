@@ -14,4 +14,9 @@ import {DecentralizedStableCoin} from "../../src/DecentralizedStableCoin.sol";
 contract Handler is Test {
     DSCEngine dsce;
     DecentralizedStableCoin dsc;
+
+    constructor(DSCEngine _engine, DecentralizedStableCoin _dsc) {
+        dsce = _engine;
+        dsc = _dsc;
+    }
 }
