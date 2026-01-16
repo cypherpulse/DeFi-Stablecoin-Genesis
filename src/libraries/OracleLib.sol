@@ -14,4 +14,13 @@ import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/interfaces/Ag
  * So if the Chainlink network explodes and you have a lot of money locked in the protocol... too bad.
  */
 
-library OracleLib {}
+library OracleLib {
+    function staleCheckLatestRoundData(AggregatorV3Interface pricefeed)
+        public
+        view
+        returns (uint80, int256, uint256, uint256, uint80)
+    {
+        (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound) =
+            pricefeed.latestRoundData();
+    }
+}
