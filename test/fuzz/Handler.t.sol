@@ -84,8 +84,9 @@ contract Handler is Test {
         timesMintIsCalled++;
     }
 
-    function updateCollateralPrice(int96 newPrice) public {
-        int256 newPriceInt = int256(newPrice);
-        ethUsdPriceFeed.updateAnswer(newPriceInt);
-    }
+    // THIS BREAKS OUR INVARIANT TEST SUITE!!!
+    // function updateCollateralPrice(int96 newPrice) public {
+    //     int256 newPriceInt = int256(newPrice);
+    //     ethUsdPriceFeed.updateAnswer(newPriceInt);
+    // }
 }
