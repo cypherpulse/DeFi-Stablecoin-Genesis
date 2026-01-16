@@ -24,6 +24,8 @@ contract Handler is Test {
 
     uint256 MAX_DEPOSIT_SIZE = type(uint96).max;
 
+    MockV3Aggregator public ethUsdPriceFeed;
+
     constructor(DSCEngine _engine, DecentralizedStableCoin _dsc) {
         dsce = _engine;
         dsc = _dsc;
