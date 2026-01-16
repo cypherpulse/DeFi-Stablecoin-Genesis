@@ -83,4 +83,9 @@ contract Handler is Test {
         vm.stopPrank();
         timesMintIsCalled++;
     }
+
+    function updateCollateralPrice(int96 newPrice) public {
+        int256 newPriceInt = int256(newPrice);
+        ethUsdPriceFeed.updateAnswer(newPriceInt);
+    }
 }
