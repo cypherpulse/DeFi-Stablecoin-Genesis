@@ -1,4 +1,4 @@
-// SPDX-Licenser-Identifier: MIT
+// SPDX-License-Identifier: MIT
 
 /***
 *Handler is going to narrow down the way our fuzzer tests work by specifying certain functions to be called and certain
@@ -34,7 +34,7 @@ contract Handler is Test {
         weth = ERC20Mock(collateralTokens[0]);
         wbtc = ERC20Mock(collateralTokens[1]);
 
-        ethUsdPriceFeed = new MockV3Aggregator(dsce.getCollateralTokenPriceFeed(address(weth)));
+        ethUsdPriceFeed = new MockV3Aggregator(8, 2000e8);
     }
 
     // Helper Functions
@@ -45,16 +45,15 @@ contract Handler is Test {
         return wbtc;
     }
 
-    function depositCollateral(uint256 collateral, uint256 amountCollateral) public {
+    function depositCollateral(uint256 collateralSeed, uint256 amountCollateral) public {
         amountCollateral = bound(amountCollateral, 1, MAX_DEPOSIT_SIZE);
         ERC20Mock collateral = _getCollateralFromSeed(collateralSeed);
-        dsce.depositCollateral(collateral, amountCollateral);
 
         // mint and approve!
         vm.startPrank(msg.sender);
         collateral.mint(msg.sender, amountCollateral);
-        collateral.approve(address(engine), amountCollateral);
-        engine.depositCollateral(address(collateral), amountCollateral);
+        collateral.approve(address(dsce), amountCollateral);
+        dsce.depositCollateral(address(collateral), amountCollateral);
         vm.stopPrank();
     }
 
@@ -69,7 +68,7 @@ contract Handler is Test {
     }
 
     function mintDsc(uint256 amount) public {
-        (uint256 totalDscMinted, uint256 collateralValueInUsd) = engine.getAccountInformation(msg.sender);
+        (uint256 totalDscMinted, uint256 collateralValueInUsd) = dsce.getAccountInformation(msg.sender);
         uint256 maxDscToMint = (collateralValueInUsd / 2) - totalDscMinted;
         if (maxDscToMint < 0) {
             return;
@@ -79,7 +78,7 @@ contract Handler is Test {
             return;
         }
         vm.startPrank(msg.sender);
-        engine.mintDsc(amount);
+        dsce.mintDsc(amount);
         vm.stopPrank();
         timesMintIsCalled++;
     }
