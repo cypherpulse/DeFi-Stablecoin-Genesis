@@ -2,6 +2,8 @@
 
 pragma solidity ^0.8.18;
 
+import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+
 /**
  * @title OracleLib
  * @author Cypherpulse.base.eth
@@ -11,3 +13,5 @@ pragma solidity ^0.8.18;
  *
  * So if the Chainlink network explodes and you have a lot of money locked in the protocol... too bad.
  */
+
+library OracleLib {}
