@@ -33,6 +33,8 @@ contract Handler is Test {
         address[] memory collateralTokens = dsce.getCollateralTokens();
         weth = ERC20Mock(collateralTokens[0]);
         wbtc = ERC20Mock(collateralTokens[1]);
+
+        ethUsdPriceFeed = new MockV3Aggregator(dsce.getCollateralTokenPriceFeed(address(weth)));
     }
 
     // Helper Functions
