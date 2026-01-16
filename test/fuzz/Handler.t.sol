@@ -11,6 +11,7 @@ import {Test} from "forge-std/Test.sol";
 import {DSCEngine} from "../../src/DSCEngine.sol";
 import {DecentralizedStableCoin} from "../../src/DecentralizedStableCoin.sol";
 import {ERC20Mock} from "../mocks/ERC20Mock.sol";
+import {MockV3Aggregator} from "../mocks/MockV3Aggregator.sol";
 
 contract Handler is Test {
     DSCEngine dsce;
